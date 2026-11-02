@@ -4,158 +4,614 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Iron Gate Storage Park — Website Design Previews (Options 1, 2 &amp; 3)</title>
-  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <title>Iron Gate Storage Park | Website Design Comparison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --navy-950: #090f1a;
+      --navy-900: #0f172a;
+      --navy-800: #162136;
+      --navy-700: #1e293b;
+      --gold-500: #d4af37;
+      --gold-400: #e5c358;
+      --gold-300: #f3d87d;
+      --slate-100: #f1f5f9;
+      --slate-300: #cbd5e1;
+      --slate-400: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top, #17233a 0%, #090f1a 60%, #060a12 100%);
+      color: #f8fafc;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Top Design Review Banner */
+    .review-banner {
+      background: linear-gradient(90deg, #162136 0%, #1f2e4a 50%, #162136 100%);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+      padding: 10px 20px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--slate-100);
+    }
+
+    .review-banner strong {
+      color: var(--gold-300);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
+    /* Header with Krissy's Iron Gate Logo */
+    .site-header {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 28px 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+    }
+
+    .brand-lockup {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .krissy-logo {
+      height: 112px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55));
+    }
+
+    .header-copy {
+      max-width: 720px;
+      margin-top: 2px;
+    }
+
+    .header-copy h1 {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .header-copy p {
+      font-size: 14px;
+      color: var(--slate-300);
+    }
+
+    /* Three Preview Cards Grid */
+    .cards-container {
+      max-width: 1360px;
+      margin: 18px auto 32px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 1040px) {
+      .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .cards-container {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+      }
+      .site-header {
+        padding: 22px 16px 12px;
+      }
+      .krissy-logo {
+        height: 92px;
+      }
+    }
+
+    .preview-card {
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.42);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .preview-card:hover,
+    .preview-card.active-card {
+      transform: translateY(-3px);
+      border-color: rgba(212, 175, 55, 0.65);
+      box-shadow: 0 24px 52px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(212, 175, 55, 0.25);
+    }
+
+    .card-top-bar {
+      padding: 13px 18px;
+      background: rgba(22, 33, 54, 0.95);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .option-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px solid rgba(212, 175, 55, 0.42);
+      color: var(--gold-300);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .option-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--slate-400);
+    }
+
+    .screenshot-link {
+      position: relative;
+      display: block;
+      aspect-ratio: 16 / 10;
+      background: #0b111e;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .screenshot-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .preview-card:hover .screenshot-link img {
+      transform: scale(1.03);
+    }
+
+    .screenshot-logo-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(9, 15, 26, 0.85);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 10px;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .screenshot-logo-badge img {
+      height: 22px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--slate-300);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+
+    .try-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: var(--slate-300);
+    }
+
+    .try-box strong {
+      color: var(--gold-300);
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 3px;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+
+    .btn-open {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 11px 16px;
+      border-radius: 11px;
+      background: linear-gradient(180deg, #e5c358 0%, #c69a25 100%);
+      color: #090f1a;
+      font-size: 13.5px;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.25);
+      transition: filter 0.18s ease, transform 0.18s ease;
+    }
+
+    .btn-open:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-inline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 11px 14px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      color: #f8fafc;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.18s ease;
+    }
+
+    .btn-inline:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Interactive Live Viewer Section */
+    .viewer-section {
+      max-width: 1360px;
+      margin: 0 auto 44px;
+      padding: 0 24px;
+    }
+
+    .viewer-bar {
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 14px 14px 0 0;
+      padding: 12px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .viewer-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .v-tab {
+      min-height: 44px;
+      padding: 8px 16px;
+      border-radius: 9px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--slate-300);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .v-tab[aria-selected="true"] {
+      background: var(--gold-500);
+      border-color: var(--gold-400);
+      color: #090f1a;
+    }
+
+    .device-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dev-btn {
+      min-height: 40px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: transparent;
+      color: var(--slate-300);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .dev-btn[aria-pressed="true"] {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    @media (max-width: 700px) {
+      .device-controls { display: none; }
+      .viewer-section { padding: 0 16px; }
+    }
+
+    .viewer-stage {
+      background: #060a12;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-top: 0;
+      border-radius: 0 0 14px 14px;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .viewer-frame {
+      width: 100%;
+      max-width: 100%;
+      height: 82vh;
+      min-height: 640px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 10px;
+      background: #ffffff;
+      transition: width 0.22s ease;
+    }
+
+    .site-footer {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 18px 24px 40px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--slate-300);
+      border-top: 1px solid rgba(148, 163, 184, 0.14);
+    }
+
+    .site-footer a {
+      color: var(--gold-300);
+      font-weight: 700;
+      text-decoration: none;
     }
   </style>
 </head>
-<body class="bg-[#F6F5F0] text-slate-900 antialiased min-h-screen flex flex-col">
+<body>
 
-  <!-- TOP DESIGN REVIEW NOTICE -->
-  <div class="bg-[#141C2B] text-slate-200 text-xs border-b border-slate-800 py-2.5 px-4 text-center">
-    <span class="inline-block px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-extrabold uppercase tracking-wider text-[11px] mr-2">Design Review Only</span>
-    <span>These three website concepts are interactive design previews for <strong>Scott &amp; Krissy Mauldin</strong>. Example rates, availability, and checkout flows are for demonstration only and do not process real payments, confirm reservations, or issue gate codes.</span>
+  <!-- Design Review Disclaimer -->
+  <div class="review-banner">
+    <strong>Design Review Only</strong>
+    These are clickable design previews. Prices and terms are examples, and nothing you enter is sent or saved.
   </div>
 
-  <!-- HEADER WITH GOLD GATE & NAVY BADGE CONCEPT LOGO -->
-  <header class="bg-white border-b border-slate-200 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-wrap items-center justify-between gap-4">
-      <div class="flex items-center gap-3.5">
-        <div class="w-12 h-12 rounded-xl bg-[#141C2B] border-2 border-[#C58B1B] flex items-center justify-center shadow-sm shrink-0">
-          <svg class="w-7 h-7 text-[#D4AF37]" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3">
-            <path d="M8 56V20C8 14 20 8 32 8C44 8 56 14 56 20V56" stroke-linecap="round"/>
-            <path d="M16 56V14M24 56V10M32 56V8M40 56V10M48 56V14" stroke-linecap="round"/>
-            <path d="M6 28H58M6 44H58" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <div class="text-xl font-extrabold tracking-tight text-[#141C2B] leading-none">
-            IRON GATE STORAGE PARK
-          </div>
-          <div class="text-xs font-bold tracking-widest uppercase text-[#9A6B13] mt-1">
-            Website Design Comparison • Water Tower Rd, Longs, SC
-          </div>
-        </div>
-      </div>
-
-      <div class="text-xs text-slate-500">
-        Prepared by <strong class="text-slate-800">End Game Digital</strong> • Concept Logo Shown (Final Sign Artwork Pending)
-      </div>
+  <!-- Header with Krissy's Iron Gate Storage Park Logo -->
+  <header class="site-header">
+    <div class="brand-lockup">
+      <img src="./assets/krissy-logo.webp" alt="Iron Gate Storage Park Logo" class="krissy-logo" />
+    </div>
+    <div class="header-copy">
+      <h1>Website Options for Iron Gate Storage Park</h1>
+      <p>Compare all three complete concepts below on desktop or phone. Click <strong>Open full preview</strong> on any card to explore that design full screen, or switch options in the live viewer below.</p>
     </div>
   </header>
 
-  <!-- MAIN THREE-OPTION COMPARISON GRID -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 flex-1 w-full space-y-8">
-    
-    <div class="max-w-3xl space-y-2">
-      <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-        Compare All Three Website Concepts
-      </h1>
-      <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-        Click <strong>Open full preview</strong> on any card below to test the full page on desktop or phone, including the space finder, modular contractor bay layouts, and sample reservation/rental walkthrough.
-      </p>
-    </div>
+  <!-- Three Large Preview Cards -->
+  <main class="cards-container">
 
-    <div class="grid lg:grid-cols-3 gap-7 items-stretch">
+    <!-- OPTION 1 (/ag/) -->
+    <article class="preview-card active-card" id="card-1">
+      <div class="card-top-bar">
+        <span class="option-pill">Option 1</span>
+        <span class="option-tag">Interactive Space Finder + 20-Module Blueprint</span>
+      </div>
+      <a href="./ag/" class="screenshot-link" aria-label="Open Option 1 full preview">
+        <img src="./assets/hero-irongate-aerial.jpg" alt="Option 1 website preview screenshot" />
+        <span class="screenshot-logo-badge">
+          <img src="./assets/krissy-logo.webp" alt="" />
+          <span>Includes Krissy's Logo</span>
+        </span>
+      </a>
+      <div class="card-body">
+        <div>
+          <h2 class="card-title">Boat, RV, Trailer &amp; Contractor Storage Finder</h2>
+          <p class="card-desc">
+            Leads with an instant category and rig-length filter above the fold, an interactive 30'&times;100' (20-module) contractor building blueprint, a separate 48-hour free hold modal, and a 3-step pre-lease demonstration.
+          </p>
+          <div class="try-box">
+            <strong>What to try</strong>
+            Filter by category or rig length, click the 10&times;15 to 20&times;30 bay buttons on the building blueprint, and test both the Free 48-Hour Hold and Pre-Lease modals.
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="./ag/" class="btn-open">Open full preview &rarr;</a>
+          <button type="button" class="btn-inline" onclick="selectOption('1')">Preview below</button>
+        </div>
+      </div>
+    </article>
 
-      <!-- OPTION 1 (/ag/) -->
-      <article class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col">
-        <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-          <span class="px-3 py-1 rounded-full bg-[#141C2B] text-amber-300 text-xs font-extrabold uppercase tracking-wider">Option 1</span>
-          <span class="text-xs font-semibold text-slate-500">Retail Space Finder &amp; 30'&times;100' Blueprint</span>
-        </div>
-        <a href="./ag/" class="block relative group overflow-hidden bg-slate-900 aspect-[16/10] border-b border-slate-200">
-          <img src="./assets/hero-irongate-aerial.jpg" alt="Option 1 Preview" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-transparent flex items-end p-4">
-            <div class="text-white">
-              <div class="text-xs font-bold text-amber-300 uppercase">Water Tower Road • Longs, SC</div>
-              <div class="text-base font-extrabold leading-snug">Daylight Retail Layout + Interactive 20-Module Floor Plan</div>
-            </div>
-          </div>
-        </a>
-        <div class="p-6 flex-1 flex flex-col justify-between space-y-5">
-          <div class="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-            <p>
-              Structured like a modern regional self-storage operator with an immediate category and length calculator, horizontal space cards with door clearances, a separate 48-hour hold modal, and a 3-step sample pre-lease flow.
-            </p>
-          </div>
-          <div class="pt-2">
-            <a href="./ag/" class="w-full py-3 px-4 rounded-xl bg-[#141C2B] hover:bg-slate-800 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition">
-              <span>Open full preview</span>
-              <span>&rarr;</span>
-            </a>
+    <!-- OPTION 2 (/claude/) -->
+    <article class="preview-card" id="card-2">
+      <div class="card-top-bar">
+        <span class="option-pill">Option 2</span>
+        <span class="option-tag">Multi-View App + Roadside QR Sign Preview</span>
+      </div>
+      <a href="./claude/" class="screenshot-link" aria-label="Open Option 2 full preview">
+        <img src="./assets/claude-card-thumb.jpg" alt="Option 2 website preview screenshot" />
+        <span class="screenshot-logo-badge">
+          <img src="./assets/krissy-logo.webp" alt="" />
+          <span>Includes Krissy's Logo</span>
+        </span>
+      </a>
+      <div class="card-body">
+        <div>
+          <h2 class="card-title">Reserve Your Spot Before the Gate Opens</h2>
+          <p class="card-desc">
+            Deep green and brass design with dedicated Boat, RV, and Contractor Bay views, a length-based space finder, interactive bay layout toggles, and a mobile roadside QR sign preview.
+          </p>
+          <div class="try-box">
+            <strong>What to try</strong>
+            Enter your rig's length in the finder, switch Monthly/Yearly pricing, change the bay layout, test a reservation, and click "From the roadside sign" in the footer.
           </div>
         </div>
-      </article>
+        <div class="card-actions">
+          <a href="./claude/" class="btn-open">Open full preview &rarr;</a>
+          <button type="button" class="btn-inline" onclick="selectOption('2')">Preview below</button>
+        </div>
+      </div>
+    </article>
 
-      <!-- OPTION 2 (/claude/) -->
-      <article class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col">
-        <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-          <span class="px-3 py-1 rounded-full bg-[#141C2B] text-amber-300 text-xs font-extrabold uppercase tracking-wider">Option 2</span>
-          <span class="text-xs font-semibold text-slate-500">Editorial Forest &amp; Length Calculator</span>
-        </div>
-        <a href="./claude/" class="block relative group overflow-hidden bg-slate-900 aspect-[16/10] border-b border-slate-200">
-          <img src="./assets/claude-card-thumb.jpg" alt="Option 2 Preview" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" />
-        </a>
-        <div class="p-6 flex-1 flex flex-col justify-between space-y-5">
-          <div class="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-            <p>
-              Deep forest-green and warm cream palette leading with an interactive length stepper in the hero, three simplified outdoor pricing tiers (Compact, Standard, Oversized), and an interactive 14-bay / 20-bay wall-sliding grid.
-            </p>
-          </div>
-          <div class="pt-2">
-            <a href="./claude/" class="w-full py-3 px-4 rounded-xl bg-[#141C2B] hover:bg-slate-800 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition">
-              <span>Open full preview</span>
-              <span>&rarr;</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- OPTION 3 (/codex/) -->
-      <article class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col">
-        <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-          <span class="px-3 py-1 rounded-full bg-[#141C2B] text-amber-300 text-xs font-extrabold uppercase tracking-wider">Option 3</span>
-          <span class="text-xs font-semibold text-slate-500">Architectural Concept &amp; Guided Explorer</span>
-        </div>
-        <a href="./codex/" class="block relative group overflow-hidden bg-slate-900 aspect-[16/10] border-b border-slate-200">
-          <img src="./assets/codex-hero.jpg" alt="Option 3 Preview" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-300" />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-transparent flex items-end p-4">
-            <div class="text-white">
-              <div class="text-xs font-bold text-amber-300 uppercase">Longs, South Carolina</div>
-              <div class="text-base font-extrabold leading-snug">Architectural Pine-Lined Park Concept &amp; Space Explorer</div>
-            </div>
-          </div>
-        </a>
-        <div class="p-6 flex-1 flex flex-col justify-between space-y-5">
-          <div class="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-            <p>
-              Clean editorial layout with a guided vehicle/length fit finder, interactive enclosed bay explorer, transparent pre-opening FAQ, and a step-by-step sample online rental dialog clearly labeled as a design preview.
-            </p>
-          </div>
-          <div class="pt-2">
-            <a href="./codex/" class="w-full py-3 px-4 rounded-xl bg-[#141C2B] hover:bg-slate-800 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition">
-              <span>Open full preview</span>
-              <span>&rarr;</span>
-            </a>
+    <!-- OPTION 3 (/codex/) -->
+    <article class="preview-card" id="card-3">
+      <div class="card-top-bar">
+        <span class="option-pill">Option 3</span>
+        <span class="option-tag">Editorial Layout + Dimension Fit Calculator</span>
+      </div>
+      <a href="./codex/" class="screenshot-link" aria-label="Open Option 3 full preview">
+        <img src="./assets/codex-hero.jpg" alt="Option 3 website preview screenshot" />
+        <span class="screenshot-logo-badge">
+          <img src="./assets/krissy-logo.webp" alt="" />
+          <span>Includes Krissy's Logo</span>
+        </span>
+      </a>
+      <div class="card-body">
+        <div>
+          <h2 class="card-title">Room for Work. Ready for Weekends.</h2>
+          <p class="card-desc">
+            Warm stone and dark iron editorial layout featuring a 5-category storage finder with length/width/height inputs, interactive indoor bay footprint previews, FAQs, and an opening-list modal.
+          </p>
+          <div class="try-box">
+            <strong>What to try</strong>
+            Switch storage categories, enter vehicle dimensions, toggle the proposed bay sizes, open the FAQs, and submit the opening-list preview form.
           </div>
         </div>
-      </article>
-
-    </div>
+        <div class="card-actions">
+          <a href="./codex/" class="btn-open">Open full preview &rarr;</a>
+          <button type="button" class="btn-inline" onclick="selectOption('3')">Preview below</button>
+        </div>
+      </div>
+    </article>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-between gap-3">
-      <div><strong>Iron Gate Storage Park</strong> • Water Tower Road, Longs, SC (Planned Opening: January 2027)</div>
-      <div>Design Review Hub • No Live Reservations, Payments, or Gate Codes</div>
+  <!-- Live Interactive Comparison Viewer -->
+  <section class="viewer-section" id="live-viewer" aria-label="Interactive design preview">
+    <div class="viewer-bar">
+      <div class="viewer-tabs" role="tablist" aria-label="Choose design option">
+        <button type="button" class="v-tab" id="tab-1" role="tab" aria-selected="true" onclick="selectOption('1')">Option 1</button>
+        <button type="button" class="v-tab" id="tab-2" role="tab" aria-selected="false" onclick="selectOption('2')">Option 2</button>
+        <button type="button" class="v-tab" id="tab-3" role="tab" aria-selected="false" onclick="selectOption('3')">Option 3</button>
+      </div>
+
+      <div class="device-controls" role="group" aria-label="Preview screen width">
+        <button type="button" class="dev-btn" id="dev-desktop" aria-pressed="true" onclick="setDevice('100%', 'dev-desktop')">Desktop</button>
+        <button type="button" class="dev-btn" id="dev-tablet" aria-pressed="false" onclick="setDevice('820px', 'dev-tablet')">Tablet</button>
+        <button type="button" class="dev-btn" id="dev-phone" aria-pressed="false" onclick="setDevice('390px', 'dev-phone')">Phone</button>
+      </div>
+
+      <a id="fullscreen-link" href="./ag/" class="btn-open" style="min-height:40px;padding:8px 14px;font-size:12.5px;">
+        Open full screen &rarr;
+      </a>
     </div>
+
+    <div class="viewer-stage">
+      <iframe id="preview-iframe" class="viewer-frame" src="./ag/" title="Active Iron Gate website design preview"></iframe>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    Tell us which option you like, or what to change: <a href="mailto:info@endgameads.com">info@endgameads.com</a>
   </footer>
+
+  <script>
+    const ROUTES = {
+      '1': './ag/',
+      '2': './claude/',
+      '3': './codex/',
+      'a': './claude/',
+      'b': './ag/',
+      'c': './codex/'
+    };
+
+    function selectOption(opt, skipScroll) {
+      const normalized = opt === 'a' ? '2' : opt === 'b' ? '1' : opt === 'c' ? '3' : opt;
+      const route = ROUTES[normalized] || './ag/';
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe && iframe.getAttribute('src') !== route) {
+        iframe.setAttribute('src', route);
+      }
+      const fs = document.getElementById('fullscreen-link');
+      if (fs) fs.setAttribute('href', route);
+
+      ['1', '2', '3'].forEach(id => {
+        const tab = document.getElementById('tab-' + id);
+        if (tab) tab.setAttribute('aria-selected', String(id === normalized));
+        const card = document.getElementById('card-' + id);
+        if (card) card.classList.toggle('active-card', id === normalized);
+      });
+
+      if (!skipScroll) {
+        document.getElementById('live-viewer')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function setDevice(width, btnId) {
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe) iframe.style.width = width;
+      ['dev-desktop', 'dev-tablet', 'dev-phone'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.setAttribute('aria-pressed', String(id === btnId));
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const h = (location.hash || '').replace('#', '').toLowerCase();
+      if (ROUTES[h]) {
+        selectOption(h, true);
+      }
+    });
+  </script>
 
 </body>
 </html>

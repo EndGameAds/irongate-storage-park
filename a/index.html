@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>html{color-scheme:light}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Iron Gate Storage Park</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: sticky header, full-width colour bands with a 1240px inner column; one-page app routed on the hash */
+:root{
+  --ground:#EEEBE4; --surface:#FFFFFF; --surface-2:#F6F4EF; --line:#D9D4C9; --line-2:#CFC9BC;
+  --ink:#1C2023; --ink-2:#3F454A; --ink-3:#565D63;
+  --pine:#22392D; --pine-deep:#16261D; --on-pine:#FFFFFF; --on-pine-2:#D3DDD6;
+  --brass:#C2912E; --brass-soft:#F4EBD6; --brass-text:#7A4F0E; --on-brass:#1C2023;
+  --ok-bg:#DDE8E0; --ok-fg:#1E4A30; --muted-bg:#E4DFD5; --disabled:#D6D1C6;
+  --bay-a:#3D5A48; --bay-a-fg:#E9EFEA; --bay-b:#8FA898; --bay-c:#F2EEE6; --bay-d:#D9A845;
+  --focus:#2C6BB3;
+  --display:"Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body:"Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ground:#121714; --surface:#1B211D; --surface-2:#202722; --line:#2F3832; --line-2:#3C463F;
+  --ink:#ECEFEA; --ink-2:#C4CBC5; --ink-3:#9DA69F;
+  --pine:#1A2B21; --pine-deep:#0E1611; --on-pine:#FFFFFF; --on-pine-2:#C3CFC7;
+  --brass:#D4A443; --brass-soft:#3A3020; --brass-text:#E2BC6B; --on-brass:#1C2023;
+  --ok-bg:#1F3A2A; --ok-fg:#A9D6B8; --muted-bg:#2A322D; --disabled:#3A423C;
+  --bay-a:#2E4A3A; --bay-a-fg:#E9EFEA; --bay-b:#6F8B79; --bay-c:#DCD6CA; --bay-d:#D9A845;
+  --focus:#7FB0EA; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ground:#121714; --surface:#1B211D; --surface-2:#202722; --line:#2F3832; --line-2:#3C463F;
+  --ink:#ECEFEA; --ink-2:#C4CBC5; --ink-3:#9DA69F;
+  --pine:#1A2B21; --pine-deep:#0E1611; --on-pine:#FFFFFF; --on-pine-2:#C3CFC7;
+  --brass:#D4A443; --brass-soft:#3A3020; --brass-text:#E2BC6B; --on-brass:#1C2023;
+  --ok-bg:#1F3A2A; --ok-fg:#A9D6B8; --muted-bg:#2A322D; --disabled:#3A423C;
+  --bay-a:#2E4A3A; --bay-a-fg:#E9EFEA; --bay-b:#6F8B79; --bay-c:#DCD6CA; --bay-d:#D9A845;
+  --focus:#7FB0EA; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:400 16px/1.5 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+a{color:var(--brass-text)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.015em}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band-pine{background:var(--pine);color:var(--on-pine)}
+.band-white{background:var(--surface);border-block:1px solid var(--line)}
+.eyebrow{font:600 13px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--brass-text)}
+.band-pine .eyebrow{color:var(--bay-d)}
+.h2{font-weight:800;font-stretch:112%;font-size:clamp(28px,3.6vw,44px);line-height:1.08}
+.lede{font-size:18px;color:var(--ink-2);max-width:68ch;margin:0}
+.band-pine .lede{color:var(--on-pine-2)}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:6px;border:2px solid transparent;font-weight:700;font-size:16px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--brass);color:var(--on-brass)}
+.btn-primary:hover{filter:brightness(1.06)}
+.btn-ghost{background:transparent;border-color:var(--ink);color:var(--ink)}
+.band-pine .btn-ghost{border-color:var(--on-pine);color:var(--on-pine)}
+.btn-lg{min-height:56px;font-size:18px;padding:0 26px}
+.btn[aria-disabled="true"]{background:var(--disabled);color:var(--ink-3);cursor:not-allowed;filter:none}
+.linkbtn{background:none;border:0;padding:0;color:var(--brass-text);text-decoration:underline;cursor:pointer;font-weight:600}
+
+/* header */
+.demo-band{background:var(--brass-soft);color:var(--ink);font:600 12px/1.4 var(--mono);text-align:center;padding-block:7px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.topstrip{background:var(--pine);color:var(--on-pine-2);font-size:14px}
+.topstrip .wrap{display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between;padding-block:9px}
+.topstrip strong{color:var(--on-pine)}
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:12px;background:none;border:0;padding:0;cursor:pointer;min-height:44px;text-align:left}
+.logo-badge{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+.logo-badge svg{width:60%;height:60%}
+.brand-name{display:flex;flex-direction:column;line-height:1}
+.brand-name b{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:.02em}
+.brand-name small{font:700 10.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--brass-text);margin-top:5px}
+nav.main{display:flex;align-items:center;gap:4px}
+nav.main .nl{background:transparent;border:0;border-radius:6px;padding:0 14px;min-height:44px;font-weight:600;cursor:pointer}
+nav.main .nl[aria-current="page"]{background:var(--ground)}
+.menu-btn{display:none;width:48px;height:48px;border:2px solid var(--ink);border-radius:6px;background:var(--surface);align-items:center;justify-content:center;cursor:pointer}
+.mobile-menu{border-top:1px solid var(--line);padding-block:8px 16px}
+.mobile-menu .wrap{display:flex;flex-direction:column;gap:4px}
+.mobile-menu .nl{text-align:left;background:transparent;border:0;border-radius:6px;padding:0 12px;min-height:48px;font-weight:600;font-size:18px;cursor:pointer}
+@media (max-width:880px){nav.main{display:none}.menu-btn{display:inline-flex}}
+
+/* hero */
+.hero .wrap{display:flex;flex-wrap:wrap;gap:40px;align-items:center;padding-block:56px 64px}
+.hero-copy{flex:1 1 520px;min-width:0}
+.hero h1{font-weight:800;font-stretch:115%;font-size:clamp(36px,5vw,64px);line-height:1.02;letter-spacing:-.02em;margin:14px 0 18px}
+.hero figure{flex:1 1 420px;min-width:0;margin:0}
+.hero figure svg{width:100%;height:auto;display:block;border-radius:10px}
+.hero figcaption{font:500 12px var(--mono);color:var(--on-pine-2);margin-top:10px}
+.finder{background:var(--surface);color:var(--ink);border-radius:10px;padding:22px;max-width:580px;margin-top:26px}
+.finder-label{display:block;font-weight:700;font-size:15px;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{min-height:44px;padding:0 16px;border:2px solid var(--line-2);background:var(--surface);border-radius:22px;font-weight:600;font-size:15px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.stepper{display:flex;gap:8px;align-items:center;max-width:380px}
+.stepper button{width:48px;height:48px;flex:0 0 auto;border:2px solid var(--line-2);background:var(--surface);border-radius:6px;font-size:22px;font-weight:700;cursor:pointer}
+input.field{width:100%;min-height:48px;border:2px solid var(--line-2);border-radius:6px;padding:0 14px;font:500 17px var(--body);color:var(--ink);background:var(--surface)}
+input.field::placeholder{color:var(--ink-3)}
+input.len{text-align:center;font-size:20px;font-weight:700}
+.fit{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 16px;margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+.fit-name{font-weight:700;font-size:17px}
+.fit-note{font-size:14px;color:var(--ink-3)}
+.fit-right{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.price{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:26px;white-space:nowrap}
+.price small{font-family:var(--body);font-weight:500;font-size:14px;color:var(--ink-3);font-stretch:100%}
+.reassure{font-size:14px;color:var(--on-pine-2);margin-top:12px}
+
+/* sections */
+.section{padding-block:80px}
+.section-head{display:flex;flex-wrap:wrap;gap:20px 32px;justify-content:space-between;align-items:flex-end;margin-bottom:28px}
+.section-head > div{flex:1 1 520px;min-width:0}
+.section-head .h2{margin:10px 0 12px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px}
+.card h3{font-size:21px;font-weight:750;font-stretch:108%;margin:14px 0 8px}
+.card p{margin:0;color:var(--ink-2)}
+.status{display:inline-block;font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:4px;background:var(--ok-bg);color:var(--ok-fg)}
+.status.planned{background:var(--muted-bg);color:var(--ink-2)}
+
+.seg{display:inline-flex;background:var(--muted-bg);border-radius:8px;padding:4px;flex-wrap:wrap}
+.seg button{min-height:44px;padding:0 16px;border:0;border-radius:6px;background:transparent;font-weight:600;font-size:15px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+
+.tier{border:2px solid var(--line);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:10px;background:var(--surface)}
+.tier.feature{border-color:var(--brass)}
+.tier-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tier h3{font-size:24px;font-weight:800;font-stretch:112%}
+.tier .big{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:46px;letter-spacing:-.02em;line-height:1}
+.tier .alt{font-size:15px;color:var(--ink-3)}
+.tier .btn{margin-top:auto}
+.note{margin-top:20px;background:var(--brass-soft);border-radius:8px;padding:16px 20px}
+
+.layout-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.pill{min-height:44px;padding:0 16px;border-radius:22px;border:1px solid var(--line-2);background:transparent;font-weight:600;font-size:15px;cursor:pointer}
+.band-pine .pill{border-color:#7F9688;color:var(--on-pine)}
+.pill[aria-pressed="true"]{background:var(--bay-d);border-color:var(--bay-d);color:#1C2023}
+.bldg-scroll{overflow-x:auto}
+.bldg{display:grid;grid-template-columns:repeat(10,minmax(36px,1fr));grid-template-rows:88px 88px;gap:4px;background:var(--pine-deep);padding:4px;border-radius:6px;min-width:440px}
+.bay{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:700;font-size:13px;padding:4px;border-radius:2px;transition:background .25s}
+.bay span{font-weight:500;font-size:11px}
+.bldg-meta{font-size:15px;margin-top:10px;color:var(--on-pine-2)}
+.band-white .bldg-meta,.section .bldg-meta{color:var(--ink-2)}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px}
+.steps li.later{background:var(--surface-2)}
+.steps .when{font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.steps .n{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:34px;margin:6px 0 2px}
+.steps h3{font-size:19px;font-weight:750;margin-bottom:6px}
+.steps p{margin:0;color:var(--ink-2);font-size:15px}
+
+.owner .wrap{max-width:1040px;display:flex;flex-wrap:wrap;gap:32px;align-items:center;padding-block:72px}
+.photo-ph{width:180px;height:220px;flex:0 0 auto;border:2px dashed var(--line-2);border-radius:10px;display:flex;align-items:center;justify-content:center;font:600 12px var(--mono);color:var(--ink-3)}
+blockquote{margin:12px 0 14px;font-family:var(--display);font-weight:600;font-stretch:105%;font-size:clamp(21px,2.4vw,28px);line-height:1.35}
+
+.loc .wrap{display:flex;flex-wrap:wrap;gap:36px;align-items:center;padding-block:80px}
+.loc .wrap > div{flex:1 1 360px;min-width:0}
+.loc figure{flex:1 1 480px;min-width:0;margin:0}
+.loc svg{width:100%;height:auto;display:block;border-radius:10px}
+.loc figcaption{font:500 12px var(--mono);color:var(--ink-3);margin-top:8px}
+
+.table-box{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow-x:auto}
+table{width:100%;min-width:600px;border-collapse:collapse;font-size:16px}
+th,td{padding:14px 20px;text-align:left}
+thead th{font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);background:var(--surface-2)}
+tbody tr{border-top:1px solid var(--line)}
+tbody th{font-weight:700}
+
+details{border-top:1px solid var(--line-2);padding-block:18px}
+summary{font-weight:700;font-size:19px;cursor:pointer;display:flex;justify-content:space-between;gap:16px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--brass-text)}
+details[open] summary::after{content:"–"}
+details p{margin:10px 0 0;color:var(--ink-2);font-size:17px}
+
+.cta-band .wrap{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;padding-block:56px}
+.cta-band h2{font-weight:800;font-stretch:112%;font-size:clamp(26px,3vw,38px);flex:1 1 480px}
+
+footer{background:var(--pine-deep);color:var(--on-pine-2);font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;padding-block:40px}
+footer .fname{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:20px;color:var(--on-pine)}
+footer nav{display:flex;flex-wrap:wrap;gap:4px}
+footer nav button{background:none;border:0;color:var(--on-pine);min-height:44px;padding:0 10px;cursor:pointer}
+
+/* checkout */
+.progress{background:var(--surface);border-bottom:1px solid var(--line)}
+.progress ol{list-style:none;margin:0;padding:16px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.progress li{display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--ink-3)}
+.progress li .bar{height:6px;border-radius:3px;background:var(--muted-bg)}
+.progress li.done .bar,.progress li.cur .bar{background:var(--brass)}
+.progress li.cur{color:var(--ink);font-weight:750}
+.co .wrap{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start;padding-block:32px 72px}
+.co-main{flex:999 1 540px;min-width:0}
+.co-main h1{font-weight:800;font-stretch:112%;font-size:clamp(28px,3.6vw,40px);margin-bottom:8px}
+.co-main > p.lede{margin-bottom:22px;font-size:17px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px}
+.form-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.form-grid .full{grid-column:1/-1}
+label.lbl{display:block;font-weight:700;font-size:15px;margin-bottom:6px}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:16px;cursor:pointer}
+.check input{width:22px;height:22px;margin:1px 0 0;flex:0 0 auto;accent-color:var(--brass)}
+.opt{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;align-items:center;text-align:left;width:100%;padding:16px 18px;border-radius:10px;border:2px solid var(--line);background:var(--surface);cursor:pointer}
+.opt[aria-checked="true"]{border-color:var(--brass)}
+.opt[aria-disabled="true"]{background:var(--surface-2);color:var(--ink-3);cursor:not-allowed}
+.opt .l{display:flex;gap:14px;align-items:center;min-width:0}
+.radio{width:22px;height:22px;border-radius:50%;border:2px solid currentColor;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+.opt[aria-checked="true"] .radio::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--brass)}
+.opt .t{display:block;font-weight:750;font-size:18px}
+.opt .s{display:block;font-size:15px;margin-top:2px}
+.stack{display:flex;flex-direction:column;gap:10px}
+.notice{margin-top:12px;background:var(--brass-soft);border-radius:6px;padding:10px 14px;font-size:15px}
+.co-nav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-top:26px}
+.co-nav .why{font-size:15px;color:var(--ink-2)}
+.summary{flex:1 1 300px;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;position:sticky;top:calc(env(safe-area-inset-top,0px) + 90px)}
+.summary .hd{background:var(--pine);color:var(--on-pine);padding:16px 20px;font-weight:750;font-size:18px}
+.summary .bd{padding:20px;display:flex;flex-direction:column;gap:12px}
+.summary .row{display:flex;justify-content:space-between;gap:12px}
+.summary .row span:first-child{color:var(--ink-3)}
+.summary .row span:last-child{font-weight:650;text-align:right}
+.summary .total{border-top:2px solid var(--ink);padding-top:12px;display:flex;justify-content:space-between;align-items:baseline}
+.summary .total b{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:32px}
+.done-card{background:var(--pine);color:var(--on-pine);border-radius:12px;padding:34px}
+.done-card h1{color:var(--on-pine)}
+.done-card p{color:var(--on-pine-2);font-size:18px}
+.done-card ol{color:var(--on-pine-2);padding-left:20px;margin:0;display:flex;flex-direction:column;gap:8px}
+.tick{width:52px;height:52px;border-radius:50%;background:var(--bay-d);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+
+/* sign (QR) view */
+.sign-stage{padding-block:40px 72px}
+.sign-stage .wrap{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start;justify-content:center}
+.sign-explain{flex:1 1 320px;max-width:420px;min-width:0}
+.phone{width:min(390px,100%);border-radius:36px;border:10px solid var(--ink);background:var(--ground);overflow:hidden;min-height:760px;display:flex;flex-direction:column}
+.phone .ph-head{background:var(--pine);color:var(--on-pine);padding:18px 20px 22px}
+.phone .ph-head h2{font-weight:800;font-stretch:112%;font-size:30px;line-height:1.05;margin:8px 0}
+.phone .ph-head p{margin:0;color:var(--on-pine-2);font-size:15px}
+.phone .ph-body{padding:18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.phone .ph-foot{padding:0 20px 22px;display:flex;flex-direction:column;gap:8px}
+.ph-tier{display:flex;justify-content:space-between;align-items:center;min-height:64px;padding:0 16px;background:var(--surface);border:2px solid var(--line);border-radius:10px;cursor:pointer;text-align:left}
+.ph-tier.feature{border-color:var(--brass)}
+.contact-line{font-size:14px;color:var(--ink-2)}
+.copy{background:none;border:1px solid var(--line-2);border-radius:4px;padding:2px 8px;font-size:13px;cursor:pointer;margin-left:6px}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:520px){.hero .wrap{padding-block:36px 44px}.section{padding-block:56px}.fit-right{width:100%;justify-content:space-between}}
+</style>
+
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+(function(){
+var PHONE = "[PHONE]";
+var LOGO = '<img src="../assets/krissy-logo.webp" alt="Iron Gate Storage Park" style="height:48px;width:auto;display:block;object-fit:contain">';
+var TIERS = [
+  {id:"compact",name:"Compact",max:20,range:"up to 20 ft",price:100,fits:"Jet skis, utility trailers, skiffs, small campers"},
+  {id:"standard",name:"Standard",max:30,range:"21–30 ft",price:135,fits:"Center consoles, bay boats, travel trailers, enclosed work trailers"},
+  {id:"oversized",name:"Oversized",max:45,range:"31–45 ft",price:175,fits:"Offshore boats, fifth-wheels, Class A motorhomes, fleet trucks"}
+];
+var BAYS = [
+  {id:"10x15",name:"Standard bay",size:"10 × 15 ft",fits:"Household goods, golf cart, small trade stock"},
+  {id:"20x15",name:"Double-wide",size:"20 × 15 ft",fits:"Two doors side by side, no stacking"},
+  {id:"10x30",name:"Drive-through",size:"10 × 30 ft",fits:"Enclosed trailers, material racks, boats to about 26 ft"},
+  {id:"20x30",name:"Contractor HQ",size:"20 × 30 ft",fits:"Trucks, trailers and equipment under one roof"}
+];
+var VIEWS = ["home","boat","rv","bays","reserve","sign"];
+
+var S = {view:"home",menu:false,kind:"boat",len:24,billing:"monthly",layout:"mixed",
+  step:1,coKind:"outdoor",space:null,bay:"10x30",insured:false,agreed:false,texts:true,
+  name:"",phone:"",email:"",rig:"",company:"",
+  sign:{step:"pick",tier:"standard",len:"",name:"",phone:"",texts:true}};
+
+function $(s){return document.querySelector(s)}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function fmt(n){return "$"+n.toLocaleString("en-US")}
+function tierById(id){for(var i=0;i<TIERS.length;i++)if(TIERS[i].id===id)return TIERS[i];return null}
+function fitTier(n){if(n==null||n<1)return null;for(var i=0;i<TIERS.length;i++)if(n<=TIERS[i].max)return TIERS[i];return null}
+function lenNum(v){if(v===""||v==null)return null;var n=parseInt(v,10);return isNaN(n)?null:n}
+function annual(){return S.billing==="annual"}
+function priceOf(t){return annual()?fmt(t.price*10):fmt(t.price)}
+function per(){return annual()?"/yr":"/mo"}
+function pressed(b){return b?'aria-pressed="true"':'aria-pressed="false"'}
+
+/* ---------- navigation ---------- */
+function setView(v,extra,keepScroll){
+  if(VIEWS.indexOf(v)<0)v="home";
+  S.view=v;S.menu=false;
+  if(extra)for(var k in extra)S[k]=extra[k];
+  var h=v==="home"?"":"#"+v;
+  if(location.hash!==h){try{history.replaceState(null,"",h||location.pathname+location.search)}catch(e){location.hash=h}}
+  render();
+  if(!keepScroll)window.scrollTo(0,0);
+}
+function startCheckout(opts){
+  var o={step:1,agreed:false};for(var k in opts)o[k]=opts[k];
+  setView("reserve",o);
+}
+function startReserve(){
+  if(S.kind==="bay"||S.view==="bays"){startCheckout({coKind:"bay"});return}
+  var f=fitTier(lenNum(S.len));
+  startCheckout({coKind:"outdoor",space:f?f.id:null});
+}
+
+/* ---------- pieces ---------- */
+var NAV=[["boat","Boat storage"],["rv","RV & camper"],["bays","Contractor bays"],["pricing","Pricing"]];
+function navButtons(cls){
+  return NAV.map(function(n){
+    var cur=S.view===n[0];
+    return '<button type="button" class="'+cls+'" data-nav="'+n[0]+'"'+(cur?' aria-current="page"':'')+'>'+esc(n[1])+'</button>';
+  }).join("");
+}
+function header(){
+  return '<div class="demo-band">Design preview · Prices and terms are examples until approved · Nothing is sent or saved</div>'+
+  '<div class="topstrip"><div class="wrap"><span><strong>Reserving now, free.</strong> The gate opens January 2027.</span><span>Questions? Call or text <span class="num" style="color:var(--on-pine);font-weight:600">'+PHONE+'</span></span></div></div>'+
+  '<header class="site"><div class="wrap">'+
+    '<button type="button" class="brand" data-act="home" aria-label="Iron Gate Storage Park home"><span class="logo-badge">'+LOGO+'</span><span class="brand-name"><b>IRON GATE</b><small>Storage Park · Water Tower Rd</small></span></button>'+
+    '<nav class="main" aria-label="Main">'+navButtons("nl")+'<button type="button" class="btn btn-primary" data-act="reserve" style="margin-left:8px">Reserve free</button></nav>'+
+    '<button type="button" class="menu-btn" data-act="menu" aria-expanded="'+S.menu+'" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>'+
+  '</div>'+
+  (S.menu?'<div class="mobile-menu"><div class="wrap">'+navButtons("nl")+'<button type="button" class="btn btn-primary btn-lg" data-act="reserve" style="margin-top:8px">Reserve free</button></div></div>':'')+
+  '</header>';
+}
+
+var HEROES={
+  home:{eyebrow:"Boats · RVs · trailers · contractor bays",title:"Secure storage for what won’t fit at home.",sub:"Your HOA won’t allow it in the driveway, and the job trailer can’t live at the jobsite. Iron Gate is a gated, fenced park on Water Tower Road, opening January 2027.",kinds:true},
+  boat:{eyebrow:"Boat storage · Water Tower Road",title:"Boat storage close to home, behind a locked gate.",sub:"Outdoor parking for boats on trailers, from jet skis to offshore center consoles. Priced by length, with no surprise fees.",kinds:false},
+  rv:{eyebrow:"RV & camper storage · Water Tower Road",title:"Park the camper where the HOA can’t complain.",sub:"Outdoor parking for travel trailers, fifth-wheels and motorhomes up to 45 ft, inside a fenced, gated lot.",kinds:false},
+  bays:{eyebrow:"Contractor bays · Water Tower Road",title:"A bay for the crew’s gear, sized to fit.",sub:"Roll-up door bays from 10×15 to 20×30. The walls move, so your bay can grow with the business instead of moving facilities.",kinds:false}
+};
+function rendering(){
+  return '<svg viewBox="0 0 560 400" role="img" aria-label="Artist’s rendering of Iron Gate Storage Park: iron entry gate, fenced lot with a boat and camper, and a roll-up door building">'+
+  '<rect width="560" height="250" fill="#34523F"/><circle cx="452" cy="74" r="26" fill="#E8C877" opacity=".9"/>'+
+  '<rect y="236" width="560" height="164" fill="#5B5446"/><rect y="236" width="560" height="10" fill="#4A4438"/>'+
+  '<rect x="250" y="150" width="290" height="92" fill="#7D8A84"/><rect x="244" y="142" width="302" height="10" fill="#5F6B66"/>'+
+  [262,306,350,394,438,482].map(function(x){return '<rect x="'+x+'" y="172" width="34" height="62" fill="#B9C2BE"/><path d="M'+x+' 184h34M'+x+' 196h34M'+x+' 208h34M'+x+' 220h34" stroke="#97A19C" stroke-width="2"/>'}).join("")+
+  '<path d="M60 218h120l10-18h-24l-6-14h-44l-10 14H70z" fill="#ECE7DC"/><rect x="58" y="218" width="134" height="6" fill="#3F3A31"/>'+
+  '<rect x="150" y="168" width="96" height="58" rx="8" fill="#F2EEE6"/><rect x="158" y="178" width="22" height="14" fill="#6E7F86"/><rect x="188" y="178" width="22" height="14" fill="#6E7F86"/>'+
+  '<circle cx="78" cy="228" r="7" fill="#2A2724"/><circle cx="170" cy="230" r="8" fill="#2A2724"/><circle cx="226" cy="230" r="8" fill="#2A2724"/>'+
+  '<path d="M0 262h560M0 312h560M20 258v62M60 258v62M100 258v62M140 258v62M420 258v62M460 258v62M500 258v62M540 258v62" stroke="#1C2023" stroke-width="3" fill="none"/>'+
+  '<path d="M0 256h170M390 256h170" stroke="#1C2023" stroke-width="1.5" stroke-dasharray="4 5" fill="none"/>'+
+  '<path d="M180 330V246M380 330V246M184 270q96-46 192 0M184 324h192" stroke="#1C2023" stroke-width="5" fill="none"/>'+
+  '<path d="M200 324v-62M220 324v-70M240 324v-76M260 324v-80M280 324v-82M300 324v-80M320 324v-76M340 324v-70M360 324v-62" stroke="#1C2023" stroke-width="3" fill="none"/>'+
+  '<rect x="390" y="290" width="16" height="30" fill="#1C2023"/><rect x="393" y="294" width="10" height="8" fill="#D9A845"/>'+
+  '<rect x="174" y="228" width="12" height="20" fill="#1C2023"/><rect x="374" y="228" width="12" height="20" fill="#1C2023"/><circle cx="180" cy="226" r="4" fill="#E8C877"/><circle cx="380" cy="226" r="4" fill="#E8C877"/>'+
+  '<rect y="330" width="560" height="70" fill="#4A4438"/><path d="M250 400l30-70 30 70z" fill="#5E574A"/></svg>';
+}
+function finderFit(){
+  var n=lenNum(S.len);
+  if(S.view==="bays"||S.kind==="bay")return {name:"Indoor bay · 10×15 to 20×30",note:"Roll-up door, drive-up, walls move as you grow",price:"",cta:"Reserve a bay",act:"fit-bay"};
+  var t=fitTier(n);
+  if(!t&&n!=null&&n>45)return {name:"Over 45 ft? Let’s talk.",note:"Call or text "+PHONE+" and we’ll confirm a spot first.",price:"",cta:"",act:""};
+  if(!t)return {name:"Enter your length",note:"Measure from the hitch to the very back.",price:"",cta:"Reserve free",act:"fit-none"};
+  return {name:"Outdoor "+t.name+" · "+t.range,note:t.fits,price:priceOf(t)+'<small>'+per()+'</small>',cta:"Reserve free",act:"fit-tier",tier:t.id};
+}
+function stepper(id){
+  return '<div class="stepper"><button type="button" data-act="len-down" aria-label="Shorter">−</button>'+
+  '<input id="'+id+'" class="field len num" type="text" inputmode="numeric" autocomplete="off" value="'+esc(S.len===""?"":S.len)+'" placeholder="—" data-bind="len">'+
+  '<button type="button" data-act="len-up" aria-label="Longer">+</button><span style="font-weight:600;color:var(--ink-3)">feet</span></div>';
+}
+function hero(){
+  var h=HEROES[S.view]||HEROES.home, f=finderFit(), showLen=S.view!=="bays"&&S.kind!=="bay";
+  var kinds=[["boat","Boat"],["rv","RV / camper"],["trailer","Trailer"],["vehicle","Vehicle"],["bay","Contractor bay"]];
+  var lenLabel=(S.kind==="boat"||S.view==="boat")?"Overall length, tongue to motor":"Overall length, hitch to bumper";
+  return '<section class="hero band-pine"><div class="wrap"><div class="hero-copy">'+
+  '<div class="eyebrow">'+esc(h.eyebrow)+'</div><h1>'+esc(h.title)+'</h1><p class="lede">'+esc(h.sub)+'</p>'+
+  '<div class="finder">'+
+    (h.kinds?'<span class="finder-label" id="kind-l">What are you storing?</span><div class="chips" role="group" aria-labelledby="kind-l">'+kinds.map(function(k){return '<button type="button" class="chip" data-kind="'+k[0]+'" '+pressed(S.kind===k[0])+'>'+k[1]+'</button>'}).join("")+'</div>':'')+
+    (showLen?'<label class="finder-label" for="flen">'+lenLabel+'</label>'+stepper("flen"):'')+
+    '<div class="fit" aria-live="polite"><div style="min-width:0"><div class="fit-name">'+esc(f.name)+'</div><div class="fit-note">'+esc(f.note)+'</div></div>'+
+    '<div class="fit-right">'+(f.price?'<span class="price num">'+f.price+'</span>':'')+(f.cta?'<button type="button" class="btn btn-primary" data-act="'+f.act+'"'+(f.tier?' data-tier="'+f.tier+'"':'')+'>'+f.cta+'</button>':'')+'</div></div>'+
+  '</div><div class="reassure">Free to reserve. No card. Cancel anytime before move-in.</div></div>'+
+  '<figure>'+rendering()+'<figcaption>Artist’s rendering. The finished facility may differ.</figcaption></figure>'+
+  '</div></section>';
+}
+
+function securitySection(){
+  var items=[
+    ["Iron gate with personal codes","Each renter gets their own code, and every entry is logged to that account.",false],
+    ["Fence, barbed wire and lighting","A full perimeter fence with barbed wire, and lights over the lot after dark.",false],
+    ["Cameras recording 24/7","Cameras cover the gate, the drive lanes and the bay building.",false],
+    ["Caretaker living on site","Living quarters for an on-site caretaker are part of the plan for the park.",true]];
+  return '<section class="section"><div class="wrap"><div class="section-head"><div><h2 class="h2">Built so the only people inside are renters.</h2><p class="lede">Here’s the security plan for the park. Each item is marked as it goes in, so you know what’s installed before you move in.</p></div></div>'+
+  '<div class="grid">'+items.map(function(x){return '<div class="card"><span class="status'+(x[2]?' planned':'')+'">'+(x[2]?"Planned":"Being installed")+'</span><h3>'+x[0]+'</h3><p>'+x[1]+'</p></div>'}).join("")+'</div></div></section>';
+}
+function billingSeg(){
+  return '<div class="seg" role="group" aria-label="Billing">'+
+  '<button type="button" data-bill="monthly" '+pressed(!annual())+'>Monthly</button>'+
+  '<button type="button" data-bill="annual" '+pressed(annual())+'>Yearly · 2 months free</button></div>';
+}
+function pricingSection(){
+  return '<section class="band-white" id="pricing"><div class="wrap section"><div class="section-head"><div><div class="eyebrow">Sample pricing · not yet approved</div><h2 class="h2">Outdoor parking, priced by length.</h2><p class="lede">The price shown is the rent. The only other charge is a one-time [FEE] admin fee at move-in.</p></div>'+billingSeg()+'</div>'+
+  '<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(270px,1fr))">'+TIERS.map(function(t,i){
+    return '<div class="tier'+(i===1?' feature':'')+'"><div class="tier-top"><h3>'+t.name+'</h3><span class="mono" style="font-size:13px;color:var(--ink-3)">'+t.range+'</span></div>'+
+    '<div><span class="big num">'+priceOf(t)+'</span><span style="color:var(--ink-3)">'+(annual()?" /year":" /month")+'</span></div>'+
+    '<div class="alt num">'+(annual()?"Works out to "+fmt(Math.round(t.price*10/12))+"/mo":"or "+fmt(t.price*10)+"/yr, 2 months free")+'</div>'+
+    '<div>'+t.fits+'</div><button type="button" class="btn '+(i===1?"btn-primary":"btn-ghost")+'" data-act="tier" data-tier="'+t.id+'">Reserve '+t.name+'</button></div>';
+  }).join("")+'</div>'+
+  '<div class="note"><strong>Founding renters:</strong> the first 50 outdoor reservations keep the rate above for their first 12 months, monthly or yearly. After that, any change comes with 60 days’ written notice.</div></div></section>';
+}
+function buildCells(){
+  var out=[],mix="",i,r,c;
+  function small(col,row){return {col:col,row:row,label:"10×15",sub:"",bg:"var(--bay-a)",fg:"var(--bay-a-fg)"}}
+  if(S.layout==="standard"){for(r=1;r<=2;r++)for(c=1;c<=10;c++)out.push(small(c,r));mix="twenty 10×15"}
+  else if(S.layout==="big"){for(i=0;i<5;i++)out.push({col:(i*2+1)+" / span 2",row:"1 / span 2",label:"20 × 30",sub:"Contractor HQ",bg:"var(--bay-d)",fg:"#1C2023"});mix="five 20×30"}
+  else{
+    out.push({col:"1 / span 2",row:"1 / span 2",label:"20 × 30",sub:"Contractor HQ",bg:"var(--bay-d)",fg:"#1C2023"});
+    out.push({col:"3",row:"1 / span 2",label:"10 × 30",sub:"Drive-thru",bg:"var(--bay-c)",fg:"#1C2023"});
+    out.push({col:"4 / span 2",row:"1",label:"20 × 15",sub:"",bg:"var(--bay-b)",fg:"#1C2023"});
+    out.push({col:"4 / span 2",row:"2",label:"20 × 15",sub:"",bg:"var(--bay-b)",fg:"#1C2023"});
+    for(r=1;r<=2;r++)for(c=6;c<=10;c++)out.push(small(c,r));
+    mix="one 20×30, one 10×30, two 20×15, ten 10×15";
+  }
+  return {cells:out,mix:mix};
+}
+function building(){
+  var b=buildCells();
+  return '<div class="layout-row" role="group" aria-label="Building layout">'+[["standard","All 10×15"],["mixed","Mixed"],["big","All 20×30"]].map(function(l){return '<button type="button" class="pill" data-layout="'+l[0]+'" '+pressed(S.layout===l[0])+'>'+l[1]+'</button>'}).join("")+'</div>'+
+  '<div class="bldg-scroll"><div class="bldg" role="img" aria-label="Building 1, 30 by 100 feet: '+b.mix+'">'+b.cells.map(function(c){return '<div class="bay" style="grid-column:'+c.col+';grid-row:'+c.row+';background:'+c.bg+';color:'+c.fg+'">'+c.label+'<span>'+c.sub+'</span></div>'}).join("")+'</div></div>'+
+  '<div class="bldg-meta"><strong>'+b.cells.length+' bays</strong> · '+b.mix+' · Building 1 is 30 × 100 ft</div>';
+}
+function contractorTeaser(){
+  return '<section class="band-pine"><div class="wrap section" style="display:flex;flex-wrap:wrap;gap:40px;align-items:center">'+
+  '<div style="flex:1 1 360px;min-width:0"><div class="eyebrow">Contractor bays</div><h2 class="h2" style="margin:12px 0 14px">Walls that move when your crew grows.</h2><p class="lede" style="margin-bottom:24px">Building 1 has 20 roll-up bays. Interior walls slide and re-fasten, so a 10×15 can become a 20×15, a 10×30 drive-through or a full 20×30.</p><button type="button" class="btn btn-primary btn-lg" data-nav="bays">See contractor bays</button></div>'+
+  '<div style="flex:1 1 520px;min-width:0">'+building()+'</div></div></section>';
+}
+function howSection(){
+  var st=[["1","Now","Reserve free","Pick a space by length or bay size. No card.",0],["2","Before opening","Pick a move-in date","We confirm your exact space and set the date with you.",0],["3","Move-in","Sign and pay online","Sign the rental agreement on your phone. Monthly or yearly, autopay optional.",1],["4","Move-in","Get your gate code","Your personal code arrives by text. Pull in and park.",1]];
+  return '<section class="section"><div class="wrap"><h2 class="h2" style="margin-bottom:28px">Reserve tonight. Move in when the gate opens.</h2>'+
+  '<ol class="steps">'+st.map(function(s){return '<li'+(s[4]?' class="later"':'')+'><div class="when">'+s[1]+'</div><div class="n">'+s[0]+'</div><h3>'+s[2]+'</h3><p>'+s[3]+'</p></li>'}).join("")+'</ol>'+
+  '<p style="margin-top:20px;color:var(--ink-2)">Prefer a person? Call or text <strong class="num">'+PHONE+'</strong> and we’ll set it up with you.</p></div></section>';
+}
+function ownerSection(){
+  return '<section class="band-white owner"><div class="wrap"><div class="photo-ph">[OWNER PHOTO]</div><div style="flex:1 1 420px;min-width:0"><div class="eyebrow">Why Iron Gate</div>'+
+  '<blockquote>“I’ve had my own things broken into at a storage lot, more than once. I built Iron Gate on our own land on Water Tower Road so that doesn’t happen to yours.”</blockquote>'+
+  '<div style="color:var(--ink-2)">Scott [LAST NAME], owner</div></div></div></section>';
+}
+function locationSection(){
+  return '<section class="loc"><div class="wrap"><div><h2 class="h2" style="margin-bottom:14px">On Water Tower Road, between Longs and North Myrtle Beach.</h2><p class="lede" style="margin-bottom:20px">Take the Water Tower Road exit off SC-31. Close to the new neighborhoods along the corridor, so you’re not towing across town.</p><div style="font-size:17px;line-height:1.7">[STREET ADDRESS]<br>Longs, SC 29568<br>Gate access: [HOURS]</div></div>'+
+  '<figure><svg viewBox="0 0 520 320" role="img" aria-label="Map sketch: Iron Gate on Water Tower Road between SC-90 and SC-31"><rect width="520" height="320" fill="var(--muted-bg)"/>'+
+  '<path d="M-10 250C120 230 260 210 530 90" stroke="var(--surface)" stroke-width="16" fill="none"/><path d="M330 -10L300 330" stroke="var(--surface)" stroke-width="20" fill="none"/><path d="M60 -10C120 100 180 200 210 330" stroke="var(--surface)" stroke-width="10" fill="none"/>'+
+  '<text x="16" y="235" font-family="Archivo,sans-serif" font-size="14" font-weight="700" fill="var(--ink-2)">SC-90</text><text x="338" y="30" font-family="Archivo,sans-serif" font-size="14" font-weight="700" fill="var(--ink-2)">SC-31</text>'+
+  '<text x="70" y="40" font-family="Archivo,sans-serif" font-size="14" font-weight="600" fill="var(--ink-2)" transform="rotate(58 70 40)">Water Tower Rd</text>'+
+  '<circle cx="168" cy="158" r="16" fill="#22392D"/><circle cx="168" cy="158" r="6" fill="#D9A845"/><rect x="190" y="140" width="112" height="34" rx="6" fill="var(--surface)"/><text x="200" y="162" font-family="Archivo,sans-serif" font-size="14" font-weight="800" fill="var(--ink)">Iron Gate</text></svg>'+
+  '<figcaption>Sketch, not to scale. A live map goes here once the address is final.</figcaption></figure></div></section>';
+}
+function landingVehicle(){
+  var row=function(w,l,id){var t=tierById(id);return '<tr><th scope="row">'+w+'</th><td class="mono">'+l+'</td><td>'+t.name+' ('+t.range+')</td><td class="num"><strong>'+priceOf(t)+'</strong>'+per()+'</td></tr>'};
+  var boat=S.view==="boat";
+  var rows=boat?[row("Jet ski on trailer","11–14 ft","compact"),row("Jon boat / skiff","14–18 ft","compact"),row("Bay boat","20–24 ft","standard"),row("Center console","22–28 ft","standard"),row("Offshore center console","32–40 ft","oversized")]
+               :[row("Pop-up / teardrop","12–18 ft","compact"),row("Travel trailer","20–30 ft","standard"),row("Class C motorhome","24–30 ft","standard"),row("Fifth-wheel","32–42 ft","oversized"),row("Class A motorhome","34–45 ft","oversized")];
+  var tips=boat?[["Measure the whole rig","Overall length runs from the trailer tongue to the end of the motor, not the boat’s listed length."],["Insurance stays on you","Keep your boat insured while it’s stored. We lease the space; we don’t take custody of the boat."],["Wrong size? We’ll fix it","If it doesn’t fit the space you reserved, we move you before you’re charged anything."]]
+               :[["Measure hitch to bumper","Include the tongue and any rear rack or ladder in your overall length."],["Insurance stays on you","Keep your RV insured while it’s stored here."],["Over 45 ft?","Call or text "+PHONE+" with your length and we’ll confirm a spot before you reserve."]];
+  return '<section class="section"><div class="wrap"><div class="section-head"><div><h2 class="h2">What fits where</h2></div>'+billingSeg()+'</div>'+
+  '<div class="table-box"><table><thead><tr><th scope="col">'+(boat?"Boat":"RV / camper")+'</th><th scope="col">Typical length</th><th scope="col">Space</th><th scope="col">Rate</th></tr></thead><tbody>'+rows.join("")+'</tbody></table></div>'+
+  '<p style="font-size:15px;color:var(--ink-3);margin:12px 0 0">Typical lengths only. Enter your exact length above and we’ll match the space.</p>'+
+  '<div class="grid" style="margin-top:44px">'+tips.map(function(t){return '<div class="card"><h3 style="margin-top:0">'+t[0]+'</h3><p>'+t[1]+'</p></div>'}).join("")+'</div></div></section>';
+}
+function landingBays(){
+  return '<section class="section"><div class="wrap" style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">'+
+  '<div style="flex:1 1 520px;min-width:0"><h2 class="h2" style="margin-bottom:16px">Pick a layout. We set the walls.</h2>'+building()+'</div>'+
+  '<div class="box" style="flex:1 1 320px;min-width:0"><h3 style="font-size:21px;margin-bottom:6px">Bay sizes</h3>'+
+  BAYS.map(function(b){return '<div style="padding:12px 0;border-top:1px solid var(--line)"><div style="font-weight:700">'+b.name+' · <span class="mono" style="font-weight:500">'+b.size+'</span></div><div style="font-size:14px;color:var(--ink-3)">'+b.fits+'</div></div>'}).join("")+
+  '<p style="margin:14px 0 18px;color:var(--ink-2)">Bay pricing is set before opening. Reserve a size and you’ll see pricing first, with no obligation.</p><button type="button" class="btn btn-primary" data-act="fit-bay" style="width:100%">Reserve a bay</button></div></div></section>';
+}
+function faqSection(){
+  var q=[["When can I move in?","The gate opens in January 2027. Reserve now for free and we’ll contact you before opening to set your move-in date."],["Does reserving cost anything?","No. There’s no card and no charge, and you can cancel anytime before move-in."],["Do I need insurance?","Yes. Boats, RVs, trailers and vehicles must be insured by the owner. We lease the space and don’t take custody of what’s in it."],["How do I pay once I move in?","By card, monthly or yearly. Autopay is available if you want it."],["What if my rig doesn’t fit the space I reserved?","Tell us and we’ll move you to the right size before you’re charged."]];
+  return '<section class="section" style="padding-top:24px"><div class="wrap" style="max-width:900px"><h2 class="h2" style="margin-bottom:20px">Questions</h2>'+
+  q.map(function(x,i){return '<details'+(i===0?' open':'')+'><summary>'+x[0]+'</summary><p>'+x[1]+'</p></details>'}).join("")+'</div></section>'+
+  '<section class="band-pine cta-band"><div class="wrap"><h2>Hold your spot before the gate opens. It’s free.</h2><button type="button" class="btn btn-primary btn-lg" data-act="reserve">Reserve free</button></div></section>';
+}
+function footer(){
+  return '<footer><div class="wrap"><div><div style="display:flex;align-items:center;gap:12px"><span class="logo-badge">'+LOGO+'</span><div class="fname">Iron Gate Storage Park</div></div><div style="margin-top:6px">[STREET ADDRESS] · Longs, SC 29568 · <span class="num">'+PHONE+'</span></div></div>'+
+  '<nav aria-label="Footer">'+navButtons("")+'<button type="button" data-nav="sign">From the roadside sign</button></nav></div></footer>';
+}
+
+/* ---------- checkout ---------- */
+function coState(){
+  var n=lenNum(S.len), chosen=S.space?tierById(S.space):null, eff=null, msg="";
+  if(n==null)eff=chosen;
+  else if(n>45){eff=null;msg="Over 45 ft: call or text "+PHONE+" and we’ll confirm a spot that fits."}
+  else if(chosen&&n<=chosen.max)eff=chosen;
+  else{eff=fitTier(n);if(chosen)msg=chosen.name+" fits up to "+chosen.max+" ft, so we moved you to "+eff.name+" for your "+n+" ft rig."}
+  var outdoor=S.coKind==="outdoor", why="";
+  if(S.step===1&&outdoor){if(n==null)why="Enter your length to continue.";else if(n>45)why="Over 45 ft needs a quick call first.";else if(!eff)why="Pick a space."}
+  if(S.step===2){if(!S.name.trim())why="Add your name.";else if(!S.phone.trim())why="Add a mobile number.";else if(outdoor&&!S.insured)why="Confirm insurance to continue."}
+  if(S.step===3&&!S.agreed)why="Agree to the reservation terms.";
+  var bay=BAYS.filter(function(b){return b.id===S.bay})[0];
+  return {n:n,eff:eff,msg:msg,outdoor:outdoor,why:why,bay:bay};
+}
+function checkout(){
+  var c=coState(), labels=["Space","Details","Review","Done"];
+  var prog='<div class="progress"><div class="wrap"><ol aria-label="Reservation progress">'+labels.map(function(l,i){var k=i+1;return '<li class="'+(k<S.step?"done":k===S.step?"cur":"")+'"'+(k===S.step?' aria-current="step"':'')+'><div class="bar"></div>'+k+'. '+l+'</li>'}).join("")+'</ol></div></div>';
+  var body="";
+  if(S.step===1){
+    body='<h1>Choose your space</h1><p class="lede">Reservations are free. You sign the rental agreement and add payment when you pick your move-in date.</p>'+
+    '<div class="seg" role="group" aria-label="Type of storage" style="margin-bottom:22px"><button type="button" data-cokind="outdoor" '+pressed(c.outdoor)+'>Outdoor parking</button><button type="button" data-cokind="bay" '+pressed(!c.outdoor)+'>Indoor bay</button></div>';
+    if(c.outdoor){
+      body+='<div class="box" style="margin-bottom:16px"><label class="lbl" for="clen">Overall length, hitch to the very back</label>'+stepper("clen")+(c.msg?'<div class="notice" role="status">'+esc(c.msg)+'</div>':'')+'</div>'+
+      '<div class="stack" role="radiogroup" aria-label="Space">'+TIERS.map(function(t){
+        var dis=c.n!=null&&c.n>t.max, on=c.eff&&c.eff.id===t.id;
+        return '<button type="button" class="opt" role="radio" aria-checked="'+(on?"true":"false")+'"'+(dis?' aria-disabled="true"':'')+' data-space="'+t.id+'"><span class="l"><span class="radio" aria-hidden="true"></span><span><span class="t">'+t.name+' · '+t.range+'</span><span class="s">'+(dis?"Too short for "+c.n+" ft":t.fits)+'</span></span></span><span class="price num">'+priceOf(t)+'<small>'+per()+'</small></span></button>';
+      }).join("")+'</div>'+
+      '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:18px"><span style="font-weight:600">I plan to pay</span>'+billingSeg()+'</div>';
+    }else{
+      body+='<div class="stack" role="radiogroup" aria-label="Bay size">'+BAYS.map(function(b){var on=S.bay===b.id;return '<button type="button" class="opt" role="radio" aria-checked="'+(on?"true":"false")+'" data-bay="'+b.id+'"><span class="l"><span class="radio" aria-hidden="true"></span><span><span class="t">'+b.name+' · '+b.size+'</span><span class="s" style="color:var(--ink-2)">'+b.fits+'</span></span></span><span class="mono" style="font-size:13px;color:var(--ink-3)">Pricing before opening</span></button>'}).join("")+'</div>';
+    }
+  }else if(S.step===2){
+    body='<h1>Your details</h1><p class="lede">We use this to hold your space and reach you before opening.</p>'+
+    '<div class="box form-grid">'+
+    '<div><label class="lbl" for="fn">Full name</label><input id="fn" class="field" type="text" autocomplete="name" data-bind="name" value="'+esc(S.name)+'"></div>'+
+    '<div><label class="lbl" for="ph">Mobile</label><input id="ph" class="field" type="tel" autocomplete="tel" data-bind="phone" value="'+esc(S.phone)+'"></div>'+
+    '<div class="full"><label class="lbl" for="em">Email (optional)</label><input id="em" class="field" type="email" autocomplete="email" data-bind="email" value="'+esc(S.email)+'"></div>'+
+    (c.outdoor?'<div class="full"><label class="lbl" for="rig">What you’re storing (year, make, model)</label><input id="rig" class="field" type="text" placeholder="e.g. 2019 Grady-White 251" data-bind="rig" value="'+esc(S.rig)+'"></div>'
+              :'<div class="full"><label class="lbl" for="co">Company (optional)</label><input id="co" class="field" type="text" autocomplete="organization" data-bind="company" value="'+esc(S.company)+'"></div>')+
+    '</div>'+
+    (c.outdoor?'<label class="box check" style="margin-top:14px"><input id="ins" type="checkbox" data-toggle="insured"'+(S.insured?" checked":"")+'><span>It’s insured, and will stay insured while stored. <span style="color:var(--ink-3)">(Required at move-in.)</span></span></label>':'');
+  }else if(S.step===3){
+    var lines=c.outdoor?["Space: "+c.eff.name+" · "+c.eff.range+(c.n!=null?" for your "+c.n+" ft rig.":"."),"Rate at move-in: "+priceOf(c.eff)+per()+", held for your first 12 months as a founding renter."]
+                       :["Bay: "+c.bay.name+" · "+c.bay.size+".","You’ll get bay pricing before opening, with no obligation to rent."];
+    body='<h1>Review your reservation</h1><p class="lede">Nothing is charged today.</p>'+
+    '<ul class="box" style="margin:0;padding-left:44px;display:flex;flex-direction:column;gap:10px"><li>Your reservation is free, and you can cancel anytime before move-in.</li>'+lines.map(function(l){return '<li>'+esc(l)+'</li>'}).join("")+'<li>Before opening we contact you to pick a move-in date. Then you sign the rental agreement online, add a card and get your gate code.</li></ul>'+
+    '<div class="box stack" style="margin-top:14px;gap:14px">'+
+    '<label class="check"><input id="agr" type="checkbox" data-toggle="agreed"'+(S.agreed?" checked":"")+'><span>I agree to the <a href="#reserve">reservation terms</a>.</span></label>'+
+    '<label class="check"><input id="txt" type="checkbox" data-toggle="texts"'+(S.texts?" checked":"")+'><span>Text me about my reservation. <span style="color:var(--ink-3)">Msg &amp; data rates may apply. Reply STOP to opt out.</span></span></label></div>';
+  }else{
+    var sub=c.outdoor?(c.eff.name+" ("+c.eff.range+") is held for you at "+priceOf(c.eff)+per()+". No charge until move-in."):(c.bay.name+" ("+c.bay.size+") is held for you. We’ll send bay pricing before opening.");
+    body='<div class="done-card"><div class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1C2023" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>'+
+    '<h1>'+(S.name.trim()?esc(S.name.trim().split(" ")[0])+", your space is reserved.":"Your space is reserved.")+'</h1><p>'+esc(sub)+'</p>'+
+    '<ol><li>We confirm your exact space as the lot is finished.</li><li>Before opening, you pick a move-in date.</li><li>Sign online, add a card (autopay optional) and get your gate code.</li></ol></div>'+
+    '<p style="margin-top:18px;color:var(--ink-2)">This is a demo, so no reservation was actually saved. <button type="button" class="linkbtn" data-act="home">Back to Iron Gate</button></p>';
+  }
+  var nav=S.step<4?'<div class="co-nav"><button type="button" class="btn btn-ghost" data-act="co-back">Back</button><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end">'+(c.why?'<span class="why">'+esc(c.why)+'</span>':'')+'<button type="button" class="btn btn-primary btn-lg" data-act="co-next" aria-disabled="'+(c.why?"true":"false")+'">'+(S.step===3?"Reserve my space":"Continue")+'</button></div></div>':'';
+  var rows=c.outdoor?[["Space",c.eff?c.eff.name+" · "+c.eff.range:"—"],["Your length",c.n==null?"—":c.n+" ft"],["Plan",annual()?"Yearly (2 mo free)":"Monthly"],["Rate at move-in",c.eff?priceOf(c.eff)+per():"—"]]
+                     :[["Bay",c.bay.name+" · "+c.bay.size],["Rate","Sent before opening"]];
+  var summary='<aside class="summary" aria-label="Your reservation"><div class="hd">Your reservation</div><div class="bd">'+rows.map(function(r){return '<div class="row"><span>'+r[0]+'</span><span class="num">'+esc(r[1])+'</span></div>'}).join("")+
+  '<div class="total"><span style="font-weight:750">Due today</span><b class="num">$0</b></div><div style="font-size:14px;color:var(--ink-3)">Nothing is charged until you choose a move-in date and sign.</div></div></aside>';
+  return prog+'<section class="co"><div class="wrap"><div class="co-main">'+body+nav+'</div>'+summary+'</div></section>';
+}
+
+/* ---------- roadside sign (phone) ---------- */
+function signView(){
+  var g=S.sign, n=lenNum(g.len), tier=tierById(g.tier), warn="";
+  if(n!=null){if(n>45)warn="Over 45 ft: call or text "+PHONE+" and we’ll confirm a spot first.";else if(n>tier.max){tier=fitTier(n);warn="That size fits up to "+tierById(g.tier).max+" ft. Switched you to "+tier.name+"."}}
+  var why=n==null?"Enter your length.":n>45?"Over 45 ft needs a quick call.":!g.name.trim()?"Add your name.":!g.phone.trim()?"Add a mobile number.":"";
+  var head="",bodyH="",foot="";
+  if(g.step==="pick"){
+    head='<div class="eyebrow" style="color:var(--bay-d)">Opens January 2027</div><h2>Boat, RV &amp; trailer storage right here.</h2><p>Hold a spot free in under a minute. No card.</p>';
+    bodyH='<div style="font-weight:700;font-size:15px">How long is your rig, hitch to back?</div>'+TIERS.map(function(t,i){return '<button type="button" class="ph-tier'+(i===1?" feature":"")+'" data-sign-tier="'+t.id+'"><span><span style="display:block;font-weight:750;font-size:17px">'+(i===0?"Up to 20 ft":t.range)+'</span><span style="display:block;font-size:13px;color:var(--ink-3)">'+t.fits.split(",").slice(0,2).join(",")+'</span></span><span class="price num" style="font-size:22px">$'+t.price+'<small>/mo</small></span></button>'}).join("")+
+    '<div class="contact-line">Over 45 ft or need a contractor bay? Call or text <strong class="num">'+PHONE+'</strong></div><div class="contact-line">Gated, fenced and on camera. Security is being installed now.</div>';
+  }else if(g.step==="form"){
+    head='<h2>Hold '+tier.name+'</h2><p>'+tier.range+' · $'+tier.price+'/mo at move-in</p>';
+    bodyH='<div><label class="lbl" for="slen">Exact length (ft)</label><input id="slen" class="field num" type="text" inputmode="numeric" data-sbind="len" value="'+esc(g.len)+'" placeholder="e.g. 24">'+(warn?'<div class="notice" role="status">'+esc(warn)+'</div>':'')+'</div>'+
+    '<div><label class="lbl" for="sname">Name</label><input id="sname" class="field" type="text" autocomplete="name" data-sbind="name" value="'+esc(g.name)+'"></div>'+
+    '<div><label class="lbl" for="sph">Mobile</label><input id="sph" class="field" type="tel" autocomplete="tel" data-sbind="phone" value="'+esc(g.phone)+'"></div>'+
+    '<label class="check" style="font-size:14px"><input id="stx" type="checkbox" data-stoggle="texts"'+(g.texts?" checked":"")+'><span>Text me about my reservation. Msg &amp; data rates may apply. Reply STOP to opt out.</span></label>';
+    foot=(why?'<div style="font-size:14px;color:var(--ink-2);text-align:center">'+why+'</div>':'')+'<button type="button" class="btn btn-primary btn-lg" data-act="sign-submit" aria-disabled="'+(why?"true":"false")+'">Hold my spot free</button><button type="button" class="linkbtn" data-act="sign-back" style="min-height:44px">Back</button>';
+  }else{
+    head='<h2>You’re on the list.</h2><p>'+tier.name+' · '+tier.range+' · held free</p>';
+    bodyH='<div class="box"><strong>What happens next</strong><ol style="margin:8px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px"><li>We text you before opening to pick a move-in date.</li><li>You sign and pay online. Autopay is optional.</li><li>Your gate code arrives by text.</li></ol></div><div class="contact-line">Your founding rate of $'+tier.price+'/mo is held for your first 12 months. Cancel anytime before move-in.</div>';
+    foot='<button type="button" class="btn btn-ghost" data-act="sign-back">Hold another spot</button>';
+  }
+  return '<section class="sign-stage"><div class="wrap">'+
+  '<div class="sign-explain"><div class="eyebrow">Roadside sign · QR code</div><h1 class="h2" style="margin:10px 0 14px">What drivers see when they scan the sign.</h1><p class="lede" style="margin-bottom:20px">A short, phone-only page: pick a size, enter your length, add a name and number, done. It checks the length and bumps you to a bigger space if needed.</p><button type="button" class="btn btn-ghost" data-act="home">Back to the full site</button></div>'+
+  '<div class="phone" aria-label="Phone preview"><div class="ph-head"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span class="logo-badge" style="width:38px;height:38px;border-radius:10px">'+LOGO+'</span><b style="font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:.02em">IRON GATE</b></div>'+head+'</div><div class="ph-body">'+bodyH+'</div>'+(foot?'<div class="ph-foot">'+foot+'</div>':'')+'</div>'+
+  '</div></section>';
+}
+
+/* ---------- render ---------- */
+function render(){
+  var a=document.activeElement, fid=a&&a.id, sel=null;
+  try{if(a&&a.selectionStart!=null)sel=[a.selectionStart,a.selectionEnd]}catch(e){}
+  var v=S.view, html=header();
+  if(v==="reserve")html+=checkout();
+  else if(v==="sign")html+=signView();
+  else{
+    html+=hero();
+    if(v==="home")html+=securitySection()+pricingSection()+contractorTeaser()+howSection()+ownerSection()+locationSection();
+    else if(v==="boat"||v==="rv")html+=landingVehicle()+securitySection();
+    else if(v==="bays")html+=landingBays()+securitySection();
+    html+=faqSection();
+  }
+  html+=footer();
+  $("#app").innerHTML=html;
+  if(fid){var el=document.getElementById(fid);if(el){el.focus({preventScroll:true});if(sel)try{el.setSelectionRange(sel[0],sel[1])}catch(e){}}}
+}
+
+/* ---------- events ---------- */
+document.addEventListener("click",function(e){
+  var t=e.target.closest("button");if(!t)return;
+  var d=t.dataset;
+  if(d.nav){
+    if(d.nav==="pricing"){setView("home");setTimeout(function(){var p=$("#pricing");if(p)p.scrollIntoView({behavior:"smooth"})},30);return}
+    var k=d.nav==="bays"?"bay":d.nav==="rv"?"rv":d.nav==="boat"?"boat":S.kind;
+    setView(d.nav,{kind:k});return;
+  }
+  if(d.kind){S.kind=d.kind;render();return}
+  if(d.bill){S.billing=d.bill;render();return}
+  if(d.layout){S.layout=d.layout;render();return}
+  if(d.cokind){S.coKind=d.cokind;render();return}
+  if(d.space){if(t.getAttribute("aria-disabled")==="true")return;S.space=d.space;render();return}
+  if(d.bay){S.bay=d.bay;render();return}
+  if(d.signTier){S.sign.step="form";S.sign.tier=d.signTier;S.sign.len="";render();return}
+  switch(d.act){
+    case "home":setView("home");break;
+    case "menu":S.menu=!S.menu;render();break;
+    case "reserve":startReserve();break;
+    case "fit-bay":startCheckout({coKind:"bay"});break;
+    case "fit-none":startCheckout({coKind:"outdoor",space:null});break;
+    case "fit-tier":startCheckout({coKind:"outdoor",space:d.tier});break;
+    case "tier":startCheckout({coKind:"outdoor",space:d.tier,len:""});break;
+    case "len-up":S.len=Math.min(60,(lenNum(S.len)||0)+1);render();break;
+    case "len-down":S.len=Math.max(1,(lenNum(S.len)||2)-1);render();break;
+    case "co-back":if(S.step===1)setView("home");else{S.step--;render();window.scrollTo(0,0)}break;
+    case "co-next":
+      var c=coState();if(c.why)return;
+      if(S.step===1&&c.outdoor&&c.eff)S.space=c.eff.id;
+      S.step++;render();window.scrollTo(0,0);break;
+    case "sign-back":S.sign.step="pick";S.sign.len="";render();break;
+    case "sign-submit":
+      if(t.getAttribute("aria-disabled")==="true")return;
+      var n=lenNum(S.sign.len);var ft=fitTier(n);if(ft&&n>tierById(S.sign.tier).max)S.sign.tier=ft.id;
+      S.sign.step="done";render();break;
+  }
+});
+document.addEventListener("input",function(e){
+  var t=e.target, b=t.dataset.bind, sb=t.dataset.sbind;
+  if(b==="len"){var v=t.value.replace(/[^0-9]/g,"").slice(0,2);S.len=v===""?"":parseInt(v,10);render();return}
+  if(b){S[b]=t.value;softUpdate();return}
+  if(sb==="len"){S.sign.len=t.value.replace(/[^0-9]/g,"").slice(0,2);render();return}
+  if(sb){S.sign[sb]=t.value;softUpdate();return}
+});
+document.addEventListener("change",function(e){
+  var t=e.target;
+  if(t.dataset.toggle){S[t.dataset.toggle]=t.checked;render();return}
+  if(t.dataset.stoggle){S.sign[t.dataset.stoggle]=t.checked;render();return}
+});
+var softT=null;
+function softUpdate(){clearTimeout(softT);softT=setTimeout(render,120)}
+
+function fromHash(){var h=(location.hash||"").replace("#","");S.view=VIEWS.indexOf(h)>=0?h:"home";if(S.view==="bays")S.kind="bay";if(S.view==="rv")S.kind="rv";S.menu=false;render()}
+window.addEventListener("hashchange",fromHash);
+fromHash();
+})();
+</script>
+
+</body>
+</html>
